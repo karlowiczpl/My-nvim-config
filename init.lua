@@ -16,6 +16,7 @@ require('lazy').setup{
 	require 'plugins.comment',
 	require 'plugins.autocompletion',
 	require 'plugins.lsp',
+	require 'plugins.tree',
 }
 
 function ColorMyPencils(color)
