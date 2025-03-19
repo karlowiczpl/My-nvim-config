@@ -80,15 +80,14 @@ return {
     vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'search [g]it [b]ranches' })
 
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch by [g]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
-    vim.keymap.set('n', '<leader>ss', function()
+    vim.keymap.set('n', '<leader>fw', builtin.current_buffer_fuzzy_find, { desc = '[f]ind [w]ord' })
+
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[f]ind [d]iagnostics' })
+    vim.keymap.set('n', '<leader>fs', function()
       builtin.lsp_document_symbols {
         symbols = { 'class', 'function', 'method', 'constructor', 'interface', 'module', 'property' },
       }
-    end, { desc = '[s]each lsp document [s]ymbols' })
+    end, { desc = '[f]ind in lsp document [s]ymbols' })
 
-    vim.keymap.set('n', '<leader>fw', builtin.current_buffer_fuzzy_find, { desc = '[f]uzzy search in current [w]indow' })
   end,
 }
