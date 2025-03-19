@@ -30,7 +30,6 @@ require("lazy").setup({
 	require("plugins.tree"),
 	require("plugins.mason"),
 	require("plugins.telescope"),
-	require("plugins.harpoon"),
 	require("plugins.aerial"),
 	require("plugins.bufferline"),
 	require("plugins.debug"),

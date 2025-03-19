@@ -1,12 +1,9 @@
--- Fuzzy Finder (files, lsp, etc)
+-- fuzzy finder (files, lsp, etc)
 return {
   'nvim-telescope/telescope.nvim',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-    -- Only load if `make` is available. Make sure you have the system
-    -- requirements installed.
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
@@ -15,8 +12,6 @@ return {
       end,
     },
     'nvim-telescope/telescope-ui-select.nvim',
-
-    -- Useful for getting pretty icons, but requires a Nerd Font.
     'nvim-tree/nvim-web-devicons',
   },
   config = function()
@@ -28,9 +23,9 @@ return {
       defaults = {
         mappings = {
           i = {
-            ['<C-k>'] = actions.move_selection_previous, -- move to prev result
-            ['<C-j>'] = actions.move_selection_next,     -- move to next result
-            ['<C-l>'] = actions.select_default,          -- open file
+            ['<c-k>'] = actions.move_selection_previous, -- move to prev result
+            ['<c-j>'] = actions.move_selection_next,     -- move to next result
+            ['<c-l>'] = actions.select_default,          -- open file
           },
           n = {
             ['q'] = actions.close,
@@ -75,22 +70,25 @@ return {
       },
     }
 
-    -- Enable telescope fzf native, if installed
+    -- enable telescope fzf native, if installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
-    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch existing [B]uffers' })
-    vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'Search [G]it [F]iles' })
-    vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'Search [G]it [C]ommits' })
-    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search [G]it [B]ranches' })
-    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
-    --vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
-    --vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sf', function()
+    -- vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[s]earch existing [b]uffers' })
+    vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'search [g]it [f]iles' })
+    vim.keymap.set('n', '<leader>gc', builtin.git_commits, { desc = 'search [g]it [c]ommits' })
+    vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'search [g]it [b]ranches' })
+
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]ind [f]iles' })
+    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[s]earch current [w]ord' })
+    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[s]earch by [g]rep' })
+    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[s]earch [d]iagnostics' })
+    vim.keymap.set('n', '<leader>ss', function()
       builtin.lsp_document_symbols {
-        symbols = { 'Class', 'Function', 'Method', 'Constructor', 'Interface', 'Module', 'Property' },
+        symbols = { 'class', 'function', 'method', 'constructor', 'interface', 'module', 'property' },
       }
-    end, { desc = '[S]each LSP document [S]ymbols' })
+    end, { desc = '[s]each lsp document [s]ymbols' })
+
+    vim.keymap.set('n', '<leader>fw', builtin.current_buffer_fuzzy_find, { desc = '[f]uzzy search in current [w]indow' })
   end,
 }
